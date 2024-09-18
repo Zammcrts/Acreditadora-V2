@@ -4,24 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Acreditadora.API.Controllers
 {
-
-    //directivas
     [ApiController]
-    [Route("/api/universities")]
-    public class UniversitiesController:ControllerBase
+    [Route("/api/majors")]
+    public class MajorsController: ControllerBase
     {
         private readonly DataContext dataContext;
 
-        public UniversitiesController(DataContext dataContext)
+        public MajorsController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync(University university) //http results
+        public async Task<IActionResult> PostAsync(Major major) //http results
         {
-            dataContext.Universities.Add(university); //se agrega
+            dataContext.Majors.Add(major); //se agrega
             await dataContext.SaveChangesAsync(); //salva los changos
-            return Ok(university);
+            return Ok(major);
         }
     }
 }
+//http request
