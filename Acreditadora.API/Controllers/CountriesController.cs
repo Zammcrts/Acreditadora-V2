@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Acreditadora.API.Controllers
 {
     [ApiController]
-    [Route("/api/students")]
-    public class StudentsController : ControllerBase
+    [Route("/api/countries")]
+    public class CountriesController : ControllerBase
     {
         private readonly DataContext dataContext;
 
-        public StudentsController(DataContext dataContext)
+        public CountriesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
@@ -19,40 +19,40 @@ namespace Acreditadora.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await dataContext.Students.ToListAsync());
+            return Ok(await dataContext.Countries.ToListAsync());
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            var student = await dataContext.Students.FirstOrDefaultAsync(x => x.Id == id);
-            if (student == null)
+            var country = await dataContext.Countries.FirstOrDefaultAsync(x => x.Id == id);
+            if (country == null)
             {
                 return NotFound();
             }
-            return Ok(student);
+            return Ok(country);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(Student student)
+        public async Task<IActionResult> PostAsync(Country country)
         {
-            dataContext.Students.Add(student);
+            dataContext.Countries.Add(country);
             await dataContext.SaveChangesAsync();
-            return Ok(student);
+            return Ok(country);
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Student student)
+        public async Task<ActionResult> Put(Country country)
         {
-            dataContext.Students.Update(student);
+            dataContext.Countries.Update(country);
             await dataContext.SaveChangesAsync();
-            return Ok(student);
+            return Ok(country);
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var affectedRows = await dataContext.Students.Where(x => x.Id == id)
+            var affectedRows = await dataContext.Countries.Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
             if (affectedRows == 0)
             {

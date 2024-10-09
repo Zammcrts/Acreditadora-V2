@@ -8,6 +8,9 @@ namespace Acreditadora.API.Data
         public DbSet<University> Universities { get; set; }//clases a tablas
         public DbSet<Major> Majors { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options):base(options) //inyecciones de dependencia, addScoped, addTransient, addSingleton
         {
@@ -20,6 +23,8 @@ namespace Acreditadora.API.Data
             modelBuilder.Entity<University>().HasIndex(x => x.Name).IsUnique();
             modelBuilder.Entity<Major>().HasIndex(x => x.Name).IsUnique();
             modelBuilder.Entity<Student>().HasIndex(x => x.Enrollment).IsUnique();
+            modelBuilder.Entity<Country>().HasIndex(y => y.Name).IsUnique();
+            modelBuilder.Entity<Subject>().HasIndex(x => x.Name).IsUnique();
         }
     }
 }

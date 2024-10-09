@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/AcreditadoraAPI20241002102253/apis/AcreditadoraAPI20241002102253",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/AcreditadoraAPI20241002102253/providers/Microsoft.ServiceLinker/linkers/ConnectionStringscon_0CF9058755",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/acreditadoraapidbserver/databases/AcreditadoraAPI_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:con"
+    }
+  }
+}

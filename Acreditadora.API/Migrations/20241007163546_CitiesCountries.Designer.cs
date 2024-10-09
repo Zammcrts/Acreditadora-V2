@@ -3,6 +3,7 @@ using Acreditadora.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acreditadora.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241007163546_CitiesCountries")]
+    partial class CitiesCountries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,37 +144,6 @@ namespace Acreditadora.API.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Acreditadora.Shared.Entities.Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Hours")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Subjects");
-                });
-
             modelBuilder.Entity("Acreditadora.Shared.Entities.University", b =>
                 {
                     b.Property<int>("Id")
@@ -214,7 +186,7 @@ namespace Acreditadora.API.Migrations
             modelBuilder.Entity("Acreditadora.Shared.Entities.City", b =>
                 {
                     b.HasOne("Acreditadora.Shared.Entities.Country", "Country")
-                        .WithMany("Cities")
+                        .WithMany("cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,7 +196,7 @@ namespace Acreditadora.API.Migrations
 
             modelBuilder.Entity("Acreditadora.Shared.Entities.Country", b =>
                 {
-                    b.Navigation("Cities");
+                    b.Navigation("cities");
                 });
 #pragma warning restore 612, 618
         }
